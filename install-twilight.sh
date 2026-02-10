@@ -2,19 +2,19 @@
 
 set -euo pipefail
 
-app_name=zen-twilight
+app_name=enso-twilight
 literal_name_of_installation_directory=".tarball-installations"
 universal_path_for_installation_directory="$HOME/$literal_name_of_installation_directory"
-app_installation_directory="$universal_path_for_installation_directory/zen-twilight"
-official_package_location="https://github.com/enso-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz"
-tar_location=$(mktemp /tmp/zen.XXXXXX.tar.xz)
-open_tar_application_data_location="zen"
+app_installation_directory="$universal_path_for_installation_directory/enso-twilight"
+official_package_location="https://github.com/enso-browser/desktop/releases/download/twilight/enso.linux-x86_64.tar.xz"
+tar_location=$(mktemp /tmp/enso.XXXXXX.tar.xz)
+open_tar_application_data_location="enso"
 local_bin_path="$HOME/.local/bin"
 local_application_path="$HOME/.local/share/applications"
 app_bin_in_local_bin="$local_bin_path/$app_name"
 desktop_in_local_applications="$local_application_path/$app_name.desktop"
 icon_path="$app_installation_directory/browser/chrome/icons/default/default128.png"
-executable_path=$app_installation_directory/zen
+executable_path=$app_installation_directory/enso
 
 echo "Welcome to Enso Twilight tarball installer, just chill and wait for the installation to complete!"
 
@@ -91,7 +91,7 @@ Exec=$executable_path %u
 Icon=$icon_path
 Terminal=false
 StartupNotify=true
-StartupWMClass=zen
+StartupWMClass=enso
 NoDisplay=false
 Type=Application
 MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;

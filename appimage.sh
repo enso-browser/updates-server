@@ -34,9 +34,9 @@ function log_highlight() { log "highlight" "$1"; }
 
 # Download URL globals
 # Enso Stable
-ENSO_STABLE="https://github.com/enso-browser/desktop/releases/latest/download/zen-x86_64.AppImage"
+ENSO_STABLE="https://github.com/enso-browser/desktop/releases/latest/download/enso-x86_64.AppImage"
 # Enso Twilight
-ENSO_TWILIGHT="https://github.com/enso-browser/desktop/releases/download/twilight/zen-x86_64.AppImage"
+ENSO_TWILIGHT="https://github.com/enso-browser/desktop/releases/download/twilight/enso-x86_64.AppImage"
 
 # Filename base globals
 ENSO_STABLE_NAME_BASE="EnsoBrowser"

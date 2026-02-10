@@ -3,19 +3,19 @@
 set -euo pipefail
 
 os_arch=$(uname -m)
-app_name=zen
+app_name=enso
 literal_name_of_installation_directory=".tarball-installations"
 universal_path_for_installation_directory="$HOME/$literal_name_of_installation_directory"
-app_installation_directory="$universal_path_for_installation_directory/zen"
+app_installation_directory="$universal_path_for_installation_directory/enso"
 official_package_location="" # Placeholder for download URL, to be set later
-tar_location=$(mktemp /tmp/zen.XXXXXX.tar.xz)
-open_tar_application_data_location="zen"
+tar_location=$(mktemp /tmp/enso.XXXXXX.tar.xz)
+open_tar_application_data_location="enso"
 local_bin_path="$HOME/.local/bin"
 local_application_path="$HOME/.local/share/applications"
 app_bin_in_local_bin="$local_bin_path/$app_name"
 desktop_in_local_applications="$local_application_path/$app_name.desktop"
 icon_path="$app_installation_directory/browser/chrome/icons/default/default128.png"
-executable_path=$app_installation_directory/zen
+executable_path=$app_installation_directory/enso
 
 # Check OS
 if [[ "$(uname)" != "Linux" ]]; then
@@ -39,7 +39,7 @@ case "$os_arch" in
 esac
 
 # Set the official package download URL
-official_package_location="https://github.com/enso-browser/desktop/releases/latest/download/zen.linux-$os_arch.tar.xz"
+official_package_location="https://github.com/enso-browser/desktop/releases/latest/download/enso.linux-$os_arch.tar.xz"
 
 echo "Downloading the latest package"
 curl -L --progress-bar -o $tar_location $official_package_location
@@ -112,7 +112,7 @@ Exec=$executable_path %u
 Icon=$icon_path
 Terminal=false
 StartupNotify=true
-StartupWMClass=zen
+StartupWMClass=enso
 NoDisplay=false
 Type=Application
 MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
