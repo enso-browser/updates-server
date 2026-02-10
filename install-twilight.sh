@@ -6,7 +6,7 @@ app_name=zen-twilight
 literal_name_of_installation_directory=".tarball-installations"
 universal_path_for_installation_directory="$HOME/$literal_name_of_installation_directory"
 app_installation_directory="$universal_path_for_installation_directory/zen-twilight"
-official_package_location="https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz"
+official_package_location="https://github.com/enso-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz"
 tar_location=$(mktemp /tmp/zen.XXXXXX.tar.xz)
 open_tar_application_data_location="zen"
 local_bin_path="$HOME/.local/bin"
@@ -16,7 +16,7 @@ desktop_in_local_applications="$local_application_path/$app_name.desktop"
 icon_path="$app_installation_directory/browser/chrome/icons/default/default128.png"
 executable_path=$app_installation_directory/zen
 
-echo "Welcome to Zen Twilight tarball installer, just chill and wait for the installation to complete!"
+echo "Welcome to Enso Twilight tarball installer, just chill and wait for the installation to complete!"
 
 sleep 1
 
@@ -29,7 +29,7 @@ else
     exit
 fi
 
-echo "Extracting Zen Twilight..."
+echo "Extracting Enso Twilight..."
 tar -xvJf $tar_location
 
 echo "Untarred successfully!"
@@ -57,7 +57,7 @@ fi
 
 mv $open_tar_application_data_location $app_installation_directory
 
-echo "Zen Twilight successfully moved to your safe place!"
+echo "Enso Twilight successfully moved to your safe place!"
 
 rm $tar_location
 
@@ -84,8 +84,8 @@ fi
 touch $desktop_in_local_applications
 echo "
 [Desktop Entry]
-Name=Zen Twilight
-Comment=Development build of Zen Browser with latest experimental features and updates
+Name=Enso Twilight
+Comment=Development build of Enso Browser with latest experimental features and updates
 Keywords=web;browser;internet
 Exec=$executable_path %u
 Icon=$icon_path

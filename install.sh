@@ -20,11 +20,11 @@ executable_path=$app_installation_directory/zen
 # Check OS
 if [[ "$(uname)" != "Linux" ]]; then
     echo "This script is only for Linux."
-    echo "Visit https://github.com/zen-browser/desktop#-installation to learn more about supported operating systems"
+    echo "Visit https://github.com/enso-browser/desktop#-installation to learn more about supported operating systems"
     exit 1
 fi
 
-echo -e "Welcome to Zen tarball installer, just chill and wait for the installation to complete!\n"
+echo -e "Welcome to Enso tarball installer, just chill and wait for the installation to complete!\n"
 
 sleep 1
 
@@ -34,12 +34,12 @@ case "$os_arch" in
 		echo "64-bit ARM architecture identified!"
 		os_arch="aarch64" ;;
     *)
-		echo "Zen doesn't support this architecture: $os_arch"
+		echo "Enso doesn't support this architecture: $os_arch"
 		exit 1 ;;
 esac
 
 # Set the official package download URL
-official_package_location="https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-$os_arch.tar.xz"
+official_package_location="https://github.com/enso-browser/desktop/releases/latest/download/zen.linux-$os_arch.tar.xz"
 
 echo "Downloading the latest package"
 curl -L --progress-bar -o $tar_location $official_package_location
@@ -50,7 +50,7 @@ else
     exit
 fi
 
-echo "Extracting Zen Browser..."
+echo "Extracting Enso Browser..."
 tar -xvJf $tar_location
 
 echo "Untarred successfully!"
@@ -78,7 +78,7 @@ fi
 
 mv $open_tar_application_data_location $app_installation_directory
 
-echo "Zen successfully moved to your safe place!"
+echo "Enso successfully moved to your safe place!"
 
 rm $tar_location
 
@@ -105,7 +105,7 @@ fi
 touch $desktop_in_local_applications
 echo "
 [Desktop Entry]
-Name=Zen Browser
+Name=Enso Browser
 Comment=Experience tranquillity while browsing the web without people tracking you!
 Keywords=web;browser;internet
 Exec=$executable_path %u

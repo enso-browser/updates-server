@@ -33,14 +33,14 @@ function log_err() { log "err" "$1"; }
 function log_highlight() { log "highlight" "$1"; }
 
 # Download URL globals
-# Zen Stable
-ZEN_STABLE="https://github.com/zen-browser/desktop/releases/latest/download/zen-x86_64.AppImage"
-# Zen Twilight
-ZEN_TWILIGHT="https://github.com/zen-browser/desktop/releases/download/twilight/zen-x86_64.AppImage"
+# Enso Stable
+ENSO_STABLE="https://github.com/enso-browser/desktop/releases/latest/download/zen-x86_64.AppImage"
+# Enso Twilight
+ENSO_TWILIGHT="https://github.com/enso-browser/desktop/releases/download/twilight/zen-x86_64.AppImage"
 
 # Filename base globals
-ZEN_STABLE_NAME_BASE="ZenBrowser"
-ZEN_TWILIGHT_NAME_BASE="ZenTwilight"
+ENSO_STABLE_NAME_BASE="EnsoBrowser"
+ENSO_TWILIGHT_NAME_BASE="EnsoTwilight"
 
 # Function to check if AVX2 is supported
 check_avx2_support() {
@@ -51,13 +51,13 @@ check_avx2_support() {
     fi
 }
 
-# Function to check if Zen Browser is installed
+# Function to check if Enso Browser is installed
 check_installation_status() {
     local app_name="$1"
     if [ -f ~/.local/share/AppImage/$app_name.AppImage ]; then
-        return 0  # Zen Browser installed
+        return 0  # Enso Browser installed
     else
-        return 1  # Zen Browser not installed
+        return 1  # Enso Browser not installed
     fi
 }
 
@@ -76,20 +76,20 @@ kawaii_art() {
     local file_base
 
     if [[ "$is_twilight" == "1" ]]; then
-        file_base="$ZEN_TWILIGHT_NAME_BASE"
+        file_base="$ENSO_TWILIGHT_NAME_BASE"
     else
-        file_base="$ZEN_STABLE_NAME_BASE"
+        file_base="$ENSO_STABLE_NAME_BASE"
     fi
 
     log_info "╔════════════════════════════════════════════════════╗"
     log_info "║                                                    ║"
-    log_info "║    (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧  Zen Browser Installer            ║"
+    log_info "║    (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧  Enso Browser Installer            ║"
     log_info "║                                                    ║"
  
     if check_installation_status "$file_base"; then
-        log_info "║    Status: Zen Browser Installed                   ║"
+        log_info "║    Status: Enso Browser Installed                   ║"
     else
-        log_info "║    Status: Zen Browser Not Installed               ║"
+        log_info "║    Status: Enso Browser Not Installed               ║"
     fi
 
     if check_zsync_installed; then
@@ -115,10 +115,10 @@ download_until_success() {
                 log_info "Checking for Update..."
                 ;;
             "update")
-                log_info "Updating Zen Browser..."
+                log_info "Updating Enso Browser..."
                 ;;
             "install")
-                log_info "Installing Zen Browser..."
+                log_info "Installing Enso Browser..."
                 ;;
         esac 
         if curl -# -L --connect-timeout 30 --max-time 600 "$url" -o "$output_path"; then
@@ -208,15 +208,15 @@ uninstall_appimage() {
     local app_name="$1"
     log_info ""
     # Remove AppImage
-    log_warn "Removing Zen Browser AppImage..."
+    log_warn "Removing Enso Browser AppImage..."
     rm -f ~/.local/share/AppImage/${app_name}.AppImage
 
     # Remove .desktop file
-    log_warn "Removing Zen Browser .desktop file..."
+    log_warn "Removing Enso Browser .desktop file..."
     rm -f ~/.local/share/applications/${app_name}.desktop
 
     # Remove icon
-    log_warn "Removing Zen Browser icon..."
+    log_warn "Removing Enso Browser icon..."
     rm -f ~/.local/share/icons/${app_name}.png
 
     log_info ""
@@ -231,20 +231,20 @@ check_for_updates() {
     local file_base
 
     if [[ "$is_twilight" == 1 ]]; then
-        file_base="$ZEN_TWILIGHT_NAME_BASE"
+        file_base="$ENSO_TWILIGHT_NAME_BASE"
     else
-        file_base="$ZEN_STABLE_NAME_BASE"
+        file_base="$ENSO_STABLE_NAME_BASE"
     fi
 
     log_info ""
     
 
     if [[ "$is_twilight" == 1 ]]; then
-        zsync_url="$ZEN_TWILIGHT.zsync"
-        appimage_url="$ZEN_TWILIGHT"
+        zsync_url="$ENSO_TWILIGHT.zsync"
+        appimage_url="$ENSO_TWILIGHT"
     else
-        zsync_url="$ZEN_STABLE.zsync"
-        appimage_url="$ZEN_STABLE"
+        zsync_url="$ENSO_STABLE.zsync"
+        appimage_url="$ENSO_STABLE"
     fi
 
     # Get the download directory using xdg-user-dir, using Downloads as default value
@@ -262,46 +262,46 @@ check_for_updates() {
         download_until_success "$zsync_url" "$zsync_file" "zsync"
         update_output=$(zsync -i ~/.local/share/AppImage/$file_base.AppImage -o ~/.local/share/AppImage/$file_base.AppImage "$zsync_file" 2>&1)
         if echo "$update_output" | grep -q "verifying download...checksum matches OK"; then
-            log_info "(｡♥‿♥｡) Congrats! Zen Browser is up-to-date!"
+            log_info "(｡♥‿♥｡) Congrats! Enso Browser is up-to-date!"
         else
-            echo "Updating Zen Browser..."
+            echo "Updating Enso Browser..."
             download_until_success "$appimage_url" ~/.local/share/AppImage/$file_base.AppImage "update"
             process_appimage ~/.local/share/AppImage/$file_base.AppImage $file_base
-            log_info "(｡♥‿♥｡) Zen Browser updated to the latest!"
+            log_info "(｡♥‿♥｡) Enso Browser updated to the latest!"
         fi
         rm -f "$zsync_file"
     else
-        log_err "Zen Browser is not installed!"
+        log_err "Enso Browser is not installed!"
         main_menu
     fi
 }
 
-install_zen_browser() {
+install_enso_browser() {
     local is_twilight="$1"
     local appimage_url
     local file_base
 
     if [[ "$is_twilight" == 1 ]]; then
-        file_base="$ZEN_TWILIGHT_NAME_BASE"
+        file_base="$ENSO_TWILIGHT_NAME_BASE"
     else
-        file_base="$ZEN_STABLE_NAME_BASE"
+        file_base="$ENSO_STABLE_NAME_BASE"
     fi
 
     log_info ""
 
     if [[ "$is_twilight" == 1 ]]; then
-        appimage_url="$ZEN_TWILIGHT"
+        appimage_url="$ENSO_TWILIGHT"
     else
-        appimage_url="$ZEN_STABLE"
+        appimage_url="$ENSO_STABLE"
     fi
 
-    log_warn "Downloading Zen from $appimage_url"
+    log_warn "Downloading Enso from $appimage_url"
     log_info ""
     temp_file="/tmp/$file_base.AppImage"
     download_until_success "$appimage_url" "$temp_file" "install"
     process_appimage "$temp_file" $file_base
     log_info ""
-    log_info "(｡♥‿♥｡) Zen Browser installed successfully!"
+    log_info "(｡♥‿♥｡) Enso Browser installed successfully!"
     rm -f "$temp_file"
 }
 
@@ -333,13 +333,13 @@ main_menu() {
 
     case $main_choice in
         1)
-            install_zen_browser $is_twilight
+            install_enso_browser $is_twilight
             ;;
         2)
             if [[ "$is_twilight" == 1 ]]; then
-                uninstall_appimage "$ZEN_TWILIGHT_NAME_BASE"
+                uninstall_appimage "$ENSO_TWILIGHT_NAME_BASE"
             else
-                uninstall_appimage "$ZEN_STABLE_NAME_BASE"
+                uninstall_appimage "$ENSO_STABLE_NAME_BASE"
             fi
             ;;
         3)
@@ -371,4 +371,4 @@ main_menu "${1:-stable}"
 
 # End of script
 log_info ""
-log_info "Thank you for using Zen Browser Installer!"
+log_info "Thank you for using Enso Browser Installer!"
